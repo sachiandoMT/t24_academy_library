@@ -81,6 +81,9 @@ public class RentalManageController {
         if (!model.containsAttribute("rentalManageDto")) {
             model.addAttribute("rentalManageDto", new RentalManageDto());
         }
+        //保存押した後のerror登録画面に戻す
+        //モデルの中に既に内容が入っていれば、入れて出力。なければ何もしないで画面を返す。
+
 
         return "rental/add";
     }
@@ -95,13 +98,15 @@ public class RentalManageController {
             this.rentalManageService.save(rentalManageDto);
 
             return "redirect:/rental/index";
+            //redirect=
+            //一覧画面に戻るのはデータをもってきて表示→getmappingをたたかなきゃいけない（addのままだと、そのデータが反映されない）
 
         } catch (Exception e) {
             log.error(e.getMessage());
-
+            //
             ra.addFlashAttribute("rentalManageDto", rentalManageDto);
             ra.addFlashAttribute("org.springframework.validation.BindingResult.rentalManageDto", result);
-
+            //ra=RedirectAttribute
             return "redirect:/rental/add";
         }
     }
