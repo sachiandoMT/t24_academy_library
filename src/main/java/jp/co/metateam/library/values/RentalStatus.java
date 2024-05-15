@@ -14,8 +14,6 @@ public enum RentalStatus implements Values {
     private final Integer value;
     private final String text;  
 
-
- ////追加しました（5/13） かしまくんimport
         // IntegerからRentalStatusへの変換メソッド
         public static RentalStatus fromInteger(Integer value) {
             if (value == null) {
@@ -36,4 +34,3 @@ public enum RentalStatus implements Values {
         }
 
     }
-    ////ここまでです

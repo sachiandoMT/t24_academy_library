@@ -3,29 +3,16 @@ package jp.co.metateam.library.model;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Date;
-import java.util.Optional;
  
-import org.aspectj.lang.annotation.AfterReturning;
-import org.hibernate.validator.cfg.context.ReturnValueConstraintMappingContext;
-import org.springframework.data.annotation.AccessType;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.validation.annotation.Validated;
  
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.AssertTrue;
-import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
-import jakarta.validation.executable.ValidateOnExecution;
+
 import jp.co.metateam.library.values.RentalStatus;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.Value;
-import lombok.experimental.Accessors;
-import java.time.LocalDate;
- 
+
 /**
  * 貸出管理DTO
  */

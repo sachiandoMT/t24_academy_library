@@ -27,9 +27,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import jakarta.validation.Valid;
  
- 
-//ここ追加インポート
-import org.springframework.web.bind.annotation.RequestParam;//(5/14)
+import org.springframework.web.bind.annotation.RequestParam;
  
 /**
  * 貸出管理関連クラスß
@@ -38,33 +36,21 @@ import org.springframework.web.bind.annotation.RequestParam;//(5/14)
 @Controller
 public class RentalManageController {
  
-    //final修飾子で変数が初期化された後の変更を拒否
-    //フィールド宣言（AccountServiceなど）をして変数を定義（accountService）
     private final AccountService accountService;
     private final RentalManageService rentalManageService;
     private final StockService stockService;
-    //private final RentalManageRepository rentalManageRepository; // 追加(いらなかった)
- 
-    //インスタンス生成の際に呼び出されるコンストラクタの定義
-    /*AutowiredによってSpringFrameworkがDI（Dependency Injection）を行う。
-     *DIによって、クラス間の依存関係を明示的にせずに、それらの依存関係を容易に変更したりすることができる。
-     *要は下記3つのインスタンスを、具体的な実装関係なく参照することができる。
-     *　→参照するクラスの実装を変えても、このクラスのコードは変えなくてもいい。柔軟性の高いコーディング。
-    */
+   
     @Autowired
     public RentalManageController(
-        //AccountServiceというクラスのaccountServiceというインスタンスを参照。
+    
         AccountService accountService,
         RentalManageService rentalManageService,
-        StockService stockService
-        //RentalManageRepository rentalManageRepository // 追加(いらなかった)
-    ) {
-        //コンストラクターで受け取ったaccountServiceをRentalManageControllerクラスのインスタンス変数に格納する。
-        //this.accountService→このクラスでの変数accountServiceは、右辺のaccountService(上で参照したのと同じ)と同じものです、と定義。
+        StockService stockService) {
+
         this.accountService = accountService;
         this.rentalManageService = rentalManageService;
         this.stockService = stockService;
-        //this.rentalManageRepository = rentalManageRepository; // 追加追加(いらなかった)
+    
     }
  
     /**
@@ -72,20 +58,16 @@ public class RentalManageController {
      * @param model　//Modelオブジェクトが引数として渡されています。SpringMVCが提供するモデルオブジェクト。
      * @return //メソッドが返す値や戻り値に関する情報を提供するために使用される。つまりどういうこと？
      */
-    //「/rental/index」というURI(貸出一覧画面)へのGETリクエストがこのメソッドに送信されると、そのリクエストを処理するためにこのメソッドが呼び出される。
+    
     @GetMapping("/rental/index")
     //メソッド名がindex、引数名がmodel。
     public String index(Model model) {
         // 貸出管理テーブルから全件取得
-        //取得した貸出管理情報は、変数RentalManageList に代入されており、この変数には全ての貸出管理情報が含まれる。
-        //this.rentalManageServiceサービスについては上述
         List<RentalManage> RentalManageList = this.rentalManageService.findAll();
         // 貸出一覧画面に渡すデータをmodelに追加
-        //addAttributeは属性追加のメソッド。()内に名前と、属性として追加する変数（一行上で定義）を記述する。
         model.addAttribute("rentalManageList", RentalManageList);
         // 貸出一覧画面に遷移
-        //rental/indexを返している。引数が文字列だが、これはパス名を指している。
-        //この行を使うことで、このメソッドが実行された後に、指定されたビュー(rental/index)に遷移することができる。
+    
         return "rental/index";
     }
    
@@ -151,7 +133,6 @@ public class RentalManageController {
             Long idLong = Long.parseLong(id);
             RentalManage rentalManage = this.rentalManageService.findById(idLong);
  
- 
             rentalManageDto.setEmployeeId(rentalManage.getAccount().getEmployeeId());
  
             rentalManageDto.setId(rentalManage.getId());
@@ -166,9 +147,7 @@ public class RentalManageController {
         return "rental/edit";
     }
  
- 
- 
-   
+
     @PostMapping("/rental/{id}/edit")
     public String update(@PathVariable("id") Long id, @Valid @ModelAttribute RentalManageDto rentalManageDto, BindingResult result, Model model) {
         try {
@@ -247,6 +226,4 @@ public class RentalManageController {
             return "rental/edit";
         }
     }
-   
-   
 }
