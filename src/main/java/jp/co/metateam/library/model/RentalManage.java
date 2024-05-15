@@ -25,6 +25,12 @@ public class RentalManage {
     @Column(name = "id")
     private Long id;
 
+    /*追加
+    private String employeeid;
+    private String stockid;
+    */
+
+
     /** 貸出ステータス */
     @Column(name = "status", nullable = false)
     private Integer status;
@@ -131,5 +137,18 @@ public class RentalManage {
 
     public void setAccount(Account account) {
         this.account = account;
+     }
+
+
+     /*ここから追加
+     public void setEmployeeId(String employeeid) {
+        this.employeeid = employeeid;
     }
+
+    public void setStockId(String stockid) {
+        this.stockid = stockid;
+    }
+    */
 }
+
+
