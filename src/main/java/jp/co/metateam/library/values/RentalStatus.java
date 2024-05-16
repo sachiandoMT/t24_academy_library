@@ -13,4 +13,24 @@ public enum RentalStatus implements Values {
 
     private final Integer value;
     private final String text;  
-}
+
+        // IntegerからRentalStatusへの変換メソッド
+        public static RentalStatus fromInteger(Integer value) {
+            if (value == null) {
+                return null;
+            }
+            switch (value) {
+                case 0:
+                    return RentalStatus.RENT_WAIT;
+                case 1:
+                    return RentalStatus.RENTAlING;
+                case 2:
+                    return RentalStatus.RETURNED;
+                case 3:
+                return RentalStatus.CANCELED;
+                default:
+                    throw new IllegalArgumentException("Invalid value for RentalStatus: " + value);
+            }
+        }
+
+    }
